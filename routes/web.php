@@ -45,3 +45,29 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+// raw db queries
+
+//insert info into database
+// Route::get('/insert', function() {
+
+//     DB::insert('insert into mines(mineName, backgroundInfo) values(?, ?)', ['Cwmystwyth', 'Cwmystwyth Info']);
+// });
+
+// read db
+// Route::get('/getmine', function() {
+//     $results = DB::select('select * from mines where id = ?', [1]);
+//     foreach ($results as $result) {
+//         return $result->mineName . " " . $result->backgroundInfo;
+//     }
+//     //return view('mine', $results);
+// });
+
+// delete
+// Route::get('delmine', function(){
+//     DB::delete('delete from mines where id = ?', [1]);
+// });
+
+
