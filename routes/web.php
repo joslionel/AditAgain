@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Mine;
+use App\Http\Controllers;
+use App\Http\Controllers\MineController as MineController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,15 +22,19 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
-Route::get('/test', function() {
-    return view('test');
-});
+// Route::get('/test', function() {
+//     return view('test');
+// });
 
-Route::get('/mines', function(){
-    return view('mines');
-});
+//get the mines index page
+Route::get('/mines', [App\Http\Controllers\MineController::class, 'index'])->name('index');
+
+//get an individual mine based on id
+Route::get('mines/{mine}', [App\Http\Controllers\MineController::class, 'show'])->name('mine.show');
+
+// get the quarries index page
 Route::get('/quarries', function() {
     return view('quarries');
 });
@@ -40,15 +47,17 @@ Route::get('/profile', function() {
 });
 
 // logout route
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-Auth::routes();
+Route::group(['middleware' => ['auth']], function() {
+    /**
+    * Logout Route
+    */
+    Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'perform'])->name('logout.perform');
+ });
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-
-// raw db queries
+// raw db queries///./
 
 //insert info into database
 // Route::get('/insert', function() {
@@ -71,3 +80,88 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // });
 
 
+/*
+Eloquent - object relational model
+*/
+
+// Route::get('/find', function() {
+
+//     $mines = Mine::all();
+
+//     foreach ($mines as $mine) {
+//         echo $mine->mineName;
+//     };
+
+// });
+
+// this find function doesn't work
+// Route::get('/find/{id}', function() {
+//     $mine = Mine::find($id);
+//     return $mine;
+// });
+
+// Route::get('/findwhere', function(){
+//     $mines = Mine::where('id', 2)->orderBy('id', 'desc')->take(1)->get();
+
+//     return $mines;
+// });
+
+// Route::get('/findmore', function(){
+//     $mines = Mine::findorfail(1);
+//     return $mines;
+// });
+
+// basic insert
+
+// Route::get('/basicinsert', function() {
+//     $mine = new Mine;
+
+//     $mine->mineName = 'Generic Mine';
+//     $mine->backgroundInfo = 'Info about the mine';
+
+//     $mine->save();
+// });
+
+// basic update
+
+// Route::get('/update', function() {
+//     $mine = Mine::find(2);
+
+//     $mine->mineName = 'New Mine';
+//     $mine->backgroundInfo = 'New info';
+
+//     $mine->save();
+// });
+
+// create data (update model to reflect fillable values)
+// Route::get('/create', function(){
+//     Mine::create(['mineName'=>'Cwmystwyth','backgroundInfo'=>'Info about Cwmy']);
+// });
+
+// proper update
+
+// Route::get('/update', function() {
+//     Mine::where('id', 2)->update(['mineName'=>'New Mine Name', 'backgroundInfo'=>'New history of mine']);
+// });
+
+// delete
+
+// Route::get('/delete', function(){
+//     $mine = Mine::find(2);
+
+//     $mine->delete();
+// });
+
+// delete2
+
+//Route::get('delete2', function() {
+    //Post::destroy(3); // if you know the key already
+    //Post::destroy([4,5]);
+    //Post::where('mineName'=>'Cwmystwyth')->delete(); // to delete by using a query
+
+//});
+
+//soft delete (updated imports at top of Mine model to import soft deletes)
+// Route::get('softdelete', function() {
+//     Mine::find(2)->delete();
+// });

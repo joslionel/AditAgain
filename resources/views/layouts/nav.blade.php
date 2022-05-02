@@ -49,7 +49,7 @@
                         @if (Route::has('login'))
                             <div class="hidden collapse navbar-collapse">
                                 @auth
-                                    <li class="nav-item"><a href="/profile" class="text-warning nav-link">USERNAME</a></div>
+                                    <li class="nav-item"><a href="/profile" class="text-warning nav-link">{{ Auth::user()->username }}</a></div>
                                     <li class="nav-item"><a href="/logout" class="text-light nav-link">LOGOUT</a></li>
                                 @endauth
                         @endif

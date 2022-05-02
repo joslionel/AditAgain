@@ -3,3 +3,4 @@
 @section('title', 'Mine Name')
 
 @section('top-section')
+@endsection
