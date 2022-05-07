@@ -13,12 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mines', function (Blueprint $table) {
+        Schema::create('forum_posts', function (Blueprint $table) {
             $table->id();
-            $table->string('mineName');
-            $table->text('backgroundInfo');
-            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
+            $table->unsignedBigInteger('user_id');
+            $table->text('title');
+            $table->text('body');
+            $table->string('category');
+            $table->string('tags');
+
+            $table->index('user_id');
         });
     }
 
@@ -29,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mines');
+        Schema::dropIfExists('forum_posts');
     }
 };

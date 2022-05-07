@@ -8,8 +8,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Saira+Stencil+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Saira+Stencil+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 <style>
     
     nav h1 {
@@ -50,10 +51,10 @@
                             <div class="hidden collapse navbar-collapse">
                                 @auth
                                     <li class="nav-item"><a href="/profile" class="text-warning nav-link">{{ Auth::user()->username }}</a></div>
-                                    <li class="nav-item"><a href="/logout" class="text-light nav-link">LOGOUT</a></li>
+                                    <li class="nav-item"><a href="/logout" class="text-light text-lead nav-link">LOGOUT</a></li>
                                 @endauth
                         @endif
-                            </div>
+                    </div>
                     </div>
                 @endif
             </ul>

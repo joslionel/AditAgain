@@ -8,16 +8,24 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Mine extends Model
 {
-    use SoftDeletes;
+    // use SoftDeletes;
     use HasFactory;
     protected $fillable = [
         'mineName',
         'backgroundInfo'
     ];
 
-    protected $dates = ['deleted_at'];
+    // protected $dates = ['deleted_at'];
 
-    public function photoPosts() {
-        $this->hasMany(PhotoPosts::class);
+    public function minephotos()
+    {
+        return $this->hasMany(minePhoto::class);
     }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    
 }

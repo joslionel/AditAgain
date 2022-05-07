@@ -47,4 +47,22 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+
+    public function forumposts()
+    {
+        return $this->hasMany(ForumPost::class);
+    }
+
+    // user already owns mine -> photos ???
+    // public function minephotos()
+    // {
+    //     return $this->hasMany(minePhoto::class);
+    // }
+
+    public function mines()
+    {
+        return $this->hasMany(Mine::class);
+    }
+
+
 }

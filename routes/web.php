@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Mine;
 use App\Http\Controllers;
 use App\Http\Controllers\MineController as MineController;
@@ -16,34 +17,43 @@ use App\Http\Controllers\MineController as MineController;
 |
 */
 
+// get the homepage
+
 Route::get('/', function () {
     return view('welcome');
 });
 
+// adds login modal functionality
+
 Auth::routes();
+
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
-// Route::get('/test', function() {
-//     return view('test');
-// });
+// show an individual profile
+
+Route::get('/profile/{user}', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
+
+// show own profile for editing
+
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index');
+
+// update/store profile image
+Route::post('/profile', [App\Http\Controllers\ProfileController::class, 'store'])->name('profile.store');
 
 //get the mines index page
-Route::get('/mines', [App\Http\Controllers\MineController::class, 'index'])->name('index');
+Route::get('/mines', [App\Http\Controllers\MineController::class, 'index'])->name('mine.index');
 
 //get an individual mine based on id
 Route::get('mines/{mine}', [App\Http\Controllers\MineController::class, 'show'])->name('mine.show');
 
 // get the quarries index page
 Route::get('/quarries', function() {
-    return view('quarries');
+    return view('quarries.quarries');
 });
 Route::get('/forum', function() {
-    return view('forum');
-});
-
-Route::get('/profile', function() {
-    return view('profile');
+    return view('forum.forum');
 });
 
 // logout route

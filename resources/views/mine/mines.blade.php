@@ -1,6 +1,6 @@
 @extends('layouts.nav')
 
-@section('title', 'Mines')
+@section('title', 'Mine Index')
 
 @section('top-section')
 

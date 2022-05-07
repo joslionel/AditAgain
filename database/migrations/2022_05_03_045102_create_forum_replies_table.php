@@ -13,9 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('mines', function (Blueprint $table) {
-            //
-            $table->softDeletes();
+        Schema::create('forum_replies', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->unsignedBigInteger('post_id');
+            $table->unsignedBigInteger('user_id');
+            $table->text('body');
+
+            $table->index('post_id');
         });
     }
 
@@ -26,9 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('mines', function (Blueprint $table) {
-            //
-            $table->dropColumn('deleted_at');
-        });
+        Schema::dropIfExists('forum_replies');
     }
 };

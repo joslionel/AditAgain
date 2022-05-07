@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mines', function (Blueprint $table) {
+        Schema::create('mine_photos', function (Blueprint $table) {
             $table->id();
-            $table->string('mineName');
-            $table->text('backgroundInfo');
-            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
+            $table->unsignedBigInteger('mine_id');
+            $table->unsignedBigInteger('user_id');
+            $table->text('description')->nullable();
+
+            $table->index('mine_id');
         });
     }
 
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mines');
+        Schema::dropIfExists('mine_photos');
     }
 };

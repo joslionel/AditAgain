@@ -1,5 +1,7 @@
 @extends('layouts.nav')
 
+@section('title', 'Logged In')
+
 @section('top-section')
 <div class="container">
     <div class="row justify-content-center py-5">

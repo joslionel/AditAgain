@@ -1,6 +1,6 @@
 @extends('layouts.nav')
 
-@section('title', 'Test')
+@section('title', 'Home')
 
 
 @section('top-section')
@@ -13,8 +13,18 @@
                         <h2>
                         Mine Exploration Forum & Database For <span class="text-warning">Hobbyists & Historians</span></h2>
                         <p class="lead my-4">User submitted photographs and exploration notes</p>
-                        <button class="btn btn-primary btn-lg">Sign up</button>
-                    </div>
+                        @if (Route::has('login'))
+                        
+                        @auth
+                        <span class="hidden"><a href="/forum" class="btn btn-primary btn-lg">Forum</a>
+                        <a href="/mines" class="btn btn-warning btn-lg">Browse Database</a></span>
+                        
+                        @else
+                        <span><a href="/register" class="btn btn-primary btn-lg">Sign up</a>
+                          <a href="/login" class="btn btn-primary btn-lg">Login</a></span>
+                        @endauth
+                        @endif
+                      </div>
                     <img class="img-fluid d-none d-sm-block" src="{{asset('assets/img/mf-wf.jpg')}}">
                 </div>
 

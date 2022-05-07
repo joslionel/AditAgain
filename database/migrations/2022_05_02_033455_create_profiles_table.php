@@ -17,10 +17,11 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->text('description')->nullable(true);
-            $table->string('title')->nullable(true);
+            $table->string('headline')->nullable(true);
             $table->string('facebook')->nullable(true);
             $table->string('youtube')->nullable(true);
             $table->string('url')->nullable(true);
+            $table->string('image_url')->nullable();
             $table->timestamps();
 
             $table->index('user_id');

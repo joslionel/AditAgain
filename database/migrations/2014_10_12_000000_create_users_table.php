@@ -20,6 +20,10 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            //$table->unsignedBigInteger('profile_id')->nullable();
+            // $table->unsignedBigInteger('mine_id')->nullable();
+            // $table->unsignedBigInteger('photo_id')->nullable();
+            // $table->unsignedBigInteger('post_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

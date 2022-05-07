@@ -22,7 +22,7 @@ class MineController extends Controller
 
             array_push($mineData, [$x=>$y]);
         }
-        return view('mines', $mineData);
+        return view('mine.mines', $mineData);
         
     }
 
