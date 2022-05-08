@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Mine;
 use App\Http\Controllers;
 use App\Http\Controllers\MineController as MineController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,9 @@ Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])
 
 // update/store profile image
 Route::post('/profile', [App\Http\Controllers\ProfileController::class, 'store'])->name('profile.store');
+
+// edit profile info
+Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
 //get the mines index page
 Route::get('/mines', [App\Http\Controllers\MineController::class, 'index'])->name('mine.index');

@@ -9,6 +9,10 @@ class Photo extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'path',
+    ];
+
     public function profile()
     {
         return $this->belongsTo(Profile::class);

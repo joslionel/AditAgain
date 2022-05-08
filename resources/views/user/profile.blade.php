@@ -45,8 +45,11 @@
                 <div class="row py-3">
                     <h1 class="text-light align-start">Profile Photo</h1>
                 </div>
+                
                 <div class="row py-3">
-                    <div class="container"><h2>IMAGE</h2></div>
+                    
+                    <img class="w-50 border rounded border-white" src="{{ Asset('images' . '/' . $profile->image_url)}}" alt="profile image">
+                    
                 </div>
             </div>
         </div>

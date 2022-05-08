@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Photo;
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,20 +50,33 @@ class ProfileController extends Controller
         
         $meta['title'] = $data->name;
         return view('user.editprofile', compact('data', 'meta', 'profile', 'URL', 'fbURL', 'ytURL'));
-
- 
-        
+    
     }
 
     public function store(Request $request)
     {
-        // dd($request);
-
-        $data = $request->validate([
-            'profileImage' => ['required', 'image']
+        $request->validate([
+            'profileImage' => 'required|mimes:jpg,png,jpeg|max:5048',
         ]);
         
-        dd($data);
-
+        $newImageName = auth()->user()->username . time() . 'ProfilePhoto.' . $request->profileImage->extension();
+        
+        // $request->file('profileImage')->store(public_path('/images'), $newImageName);
+        $request->file('profileImage')->storeAs('public/images', $newImageName);
+        
+        
+        
+        auth()->user()->profile->update(
+           [ 'image_url' => $newImageName,]
+        );
+        
+        return redirect('/profile');
+    
     }
+    
+    
+    public function update(Request $request)
+     {
+         dd($request->all());
+     }
 }

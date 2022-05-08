@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('path');
+            $table->unsignedBigInteger('profile_id');
+            $table->string('path')->nullable();
             $table->timestamps();
 
-            $table->index('user_id');
+            $table->index('profile_id');
         });
     }
 
