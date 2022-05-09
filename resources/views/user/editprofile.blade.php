@@ -37,7 +37,7 @@
                         <p class="text-lead text-light">{{ $profile->headline }}</p>
                         
                         <a href="#changeHeadlineModal" data-bs-toggle="modal" data-bs-target="#changeHeadlineModal" class="badge bg-secondary">Edit</a>
-
+                    
                     </div>
                 </div>
 
@@ -163,11 +163,16 @@
 
             
               <div class="form-group">
-                <input type="text" class="form-control" name="changeHeadline" placeholder="The dog, the dog, he's adit again" />
-                {{-- <input type="submit"> --}}
+                <input type="text" class="form-control" name="changeHeadline" placeholder="The dog, the dog, he's adit again" required maxlength="56"/>
+                
+                
+                
+                <input type="hidden" name="fieldToChange" value="headline">
               </div>  
                 <button type="submit" class="btn btn-primary pull-right">Submit</button>
           </form>
+
+      
 
         </div>
 
@@ -188,30 +193,28 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="changeBlurbTitle">Change Blurb</h5>
+          
           <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
+          
+          <form action="{{ Route('profile.update') }}" method="POST">
+          
+            @csrf
+
             
-            <form id="bio" method="POST" action="{{  Route('profile.update')  }}" id="different">
-                @csrf
-                <div class="form-group">
-                  
-                    <label for="newProfileBlurb">Your bio</label>
-                  <textarea form="bio" class="form-control" id="newProfileBlurb">Blah blah blah, all about me</textarea>
-                  
-                </div>
-                
-                <button type="submit" class="btn my-4 btn-primary">Submit</button>
-              </form>
-
+              <div class="form-group">
+                <textarea class="form-control" name="changeBio" maxlength="256">All about me</textarea>
+                <input type="hidden" name="fieldToChange" value="bio">
+              </div>  
+                <button type="submit" class="btn btn-primary pull-right">Submit</button>
+          </form>
 
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+
+
       </div>
     </div>
   </div>
@@ -223,33 +226,29 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="changeURLTitle">Change URL</h5>
+          
           <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         
         <div class="modal-body">
+          <p>Use the format "www.domain.extension"</p>
+          <form action="{{ Route('profile.update') }}" method="POST">
+          
+            @csrf
+
             
-            <form method="POST" action="{{  Route('profile.update')  }}" id="different">
-                @csrf
-                <div class="form-group">
-                  
-                    <label for="newProfileURL">URL</label>
-                  <input type="url" class="form-control" id="newProfileURL" placeholder="Enter URL">
-                  
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
-
-
+              <div class="form-group">
+                <input type="text" class="form-control" name="changeURL" placeholder="www.aditagain.com" pattern="^(www)\.\S*"/>
+                <input type="hidden" name="fieldToChange" value="URL">
+              </div>  
+                <button type="submit" class="btn btn-primary pull-right">Submit</button>
+          </form>
 
         </div>
-        
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+
+
       </div>
     </div>
   </div>
@@ -266,25 +265,23 @@
           </button>
         </div>
         <div class="modal-body">
+          <p>Use the format "facebook.com/username"</p>
           
-            <form method="POST" action="{{  Route('profile.update')  }}" id="different">
-                @csrf
-                <div class="form-group">
-                  
-                    <label for="newProfileFB">Facebook Profile</label>
-                  <input type="url" class="form-control" id="newProfileFB" placeholder="facebook.com/yourusername">
-                  
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
+          <form action="{{ Route('profile.update') }}" method="POST">
+          
+            @csrf
 
+            
+              <div class="form-group">
+                <input type="text" class="form-control" name="changeFB" placeholder="facebook.com/username" pattern="(facebook\.com)\/\S*"/>
+                <input type="hidden" name="fieldToChange" value="FB">
+              </div>  
+                <button type="submit" class="btn btn-primary pull-right">Submit</button>
+          </form>
 
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+
+
       </div>
     </div>
   </div>
@@ -301,28 +298,74 @@
           </button>
         </div>
         <div class="modal-body">
+          <p>Use the format "youtube.com/Your/Channel"</p>
+          <form action="{{ Route('profile.update') }}" method="POST">
           
-            <form method="POST" action="{{  Route('profile.update')  }}" id="different">
-                @csrf
-                <div class="form-group">
-                  
-                    <label for="newProfileYT">Youtube channel</label>
-                  <input type="url" class="form-control" id="newProfileYT" placeholder="Your Youtube channel address">
-                  
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
+            @csrf
 
-
+            
+              <div class="form-group">
+                <input type="text" class="form-control" name="changeYT" placeholder="youtube.com/channelName" pattern="^(youtube\.com)((\/[cC])|(\/[uU]ser)|(\/[cC]hannel))?\/\S*"/>
+                <input type="hidden" name="fieldToChange" value="YT">
+              </div>  
+                <button type="submit" class="btn btn-primary pull-right">Submit</button>
+          </form>
 
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+
+
       </div>
     </div>
   </div>
 
+  {{-- next section --}}
+  <div class="container bg-secondary">
+    
+    
+    <div class="row flex-md">
+    
+      <h1 class="text-light">Add a new mine</h1>
+
+      <div class="row flex-md">
+
+        <div class="col-4 p-3 offset-3">
+          <h2 class="text-black">Mine Name</h2>  
+
+          <div class="row">
+            INPUT
+          </div>
+        
+        </div>
+
+        <div class="col-4 p-3">
+          <h2 class="text-black">Mine Info</h2>
+          
+          <div class="row">
+            INPUT
+          </div>
+        
+        </div>
+
+      </div>
+
+      <div class="row py-3">
+        <div class="column-5 offset-3">
+          <h2 class="text-black"> Mine photos</h2>
+
+          <div class="row">
+            INPUT
+          </div>
+
+        </div>
+
+      </div>
+    
+      
+    
+    </div>
+
+
+  </div>
+
 @endsection
+
